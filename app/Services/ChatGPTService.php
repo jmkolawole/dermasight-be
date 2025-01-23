@@ -81,7 +81,6 @@ class ChatGPTService
         }
 
         // Dump the nodes for debugging
-        dd($nodes);
 
         return $nodes;
     }
