@@ -10,8 +10,7 @@ class ChatGPTService
 
     public function __construct()
     {
-        //$this->apiKey = env('OPENAI_API_KEY'); // Ensure this is set in your .env file
-        $this->apiKey = "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";
+        $this->apiKey = env('OPENAI_API_KEY'); // Ensure this is set in your .env file
     }
 
     public function getDiagnosis(string $description, ?string $imagePath = null)
