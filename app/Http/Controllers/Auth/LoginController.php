@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Traits\SendsApiResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -50,6 +51,23 @@ class LoginController extends Controller
             return $this->with(['user' => new UserResource($user), 'token' => $token])->success();
         } catch (\Throwable $th) {
             DB::rollback();
+            Log::error($th);
+
+            return $this->failure();
+        }
+    }
+
+
+    /**
+     * User logout
+     */
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+
+            return $this->success();
+        } catch (\Throwable $th) {
             Log::error($th);
 
             return $this->failure();
