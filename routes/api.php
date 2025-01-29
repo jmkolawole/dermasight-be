@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum'])->prefix('/')->group(function () {
     // User routes
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'getUsers']);
+        Route::patch('/', [UserController::class, 'updateUser']);
     });
 
     Route::prefix('diagnoses')->group(function () {
